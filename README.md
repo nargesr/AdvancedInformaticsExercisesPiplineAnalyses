@@ -4,7 +4,7 @@
 
 i) Organize "the data"
 
-I use a python script and use symlinks via os.symlink(). you can find scripts in [`script/week1/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week1).
+I use pythonc and symlinks (`os.symlink()`) to link the data. you can find scripts in [`script/week1/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week1).
 
 ii)  do some qc on one raw data file using fastqc
 
