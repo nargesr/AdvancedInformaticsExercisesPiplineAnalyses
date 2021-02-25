@@ -19,15 +19,16 @@ module load java/1.8.0
 module load hisat2/2.2.1
 
 
+ls /data/class/ecoevo283/nargesr/DNAseq/data/*1.fq.gz | sed 's/\/data\/class\/ecoevo283\/nargesr\/DNAseq\/data\///; s/_1.fq.gz//' > /data/class/ecoevo283/nargesr/DNAseq/prefixes.txt
+
 inpath="/data/class/ecoevo283/nargesr/DNAseq/"
 file=$inpath"prefixes.txt" # prefix file
 ref="/data/class/ecoevo283/nargesr/ref/dmel-all-chromosome-r6.13.fasta"
 prefix=`head -n $SLURM_ARRAY_TASK_ID  ${file} | tail -n 1`
 
 # alignments
-bwa mem -t 2 -M $ref ${inpath}data/${prefix}_1.fq.gz ${inpath}data/${prefix}_2.fq.gz | samtools view -bS - > ${inpath}mapped/${prefix}.bam
+bwa mem -t 2 -M $ref ${prefix}_1.fq.gz ${inpath}data/${prefix}_2.fq.gz | samtools view -bS - > ${inpath}mapped/${prefix}.bam
 samtools sort ${inpath}mapped/${prefix}.bam -o ${inpath}mapped/${prefix}.sort.bam
-rm ${inpath}mapped/${prefix}.bam
 
 # GATK likes readgroups
 java -jar  /opt/apps/picard-tools/1.87/AddOrReplaceReadGroups.jar I=${inpath}mapped/${prefix}.sort.bam O=${inpath}mapped/${prefix}.RG.bam SORT_ORDER=coordinate RGPL=illumina RGPU=D109LACXX RGLB=Lib1 RGID=${prefix} RGSM=${prefix} VALIDATION_STRINGENCY=LENIENT

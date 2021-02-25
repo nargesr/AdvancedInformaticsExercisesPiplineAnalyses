@@ -18,6 +18,7 @@ module load picard-tools/1.87
 module load java/1.8.0
 module load hisat2/2.2.1
 
+ls /data/class/ecoevo283/nargesr/ATACseq/data/*_R1.fq.gz | sed 's/\/data\/class\/ecoevo283\/nargesr\/ATACseq\/data\///; s/_R1.fq.gz//' > /data/class/ecoevo283/nargesr/ATACseq/prefixes.txt
 
 inpath="/data/class/ecoevo283/nargesr/ATACseq/"
 file=$inpath"prefixes.txt" # prefix file

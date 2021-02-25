@@ -20,13 +20,11 @@ module load hisat2/2.2.1
 module load R/3.6.2
 
 
-#R Code for subsetting data
-Rscript -e 'mytab = read.table("/data/class/ecoevo283/nargesr/RNAseq/rna_samples.txt",header=TRUE)
-write.table(mytab$renamed_SampleName[mytab$TissueCode=="E"],file="/data/class/ecoevo283/nargesr/RNAseq/prefixes_tissueE.txt", col.names = F, row.names = F, quote = F)
-'
+ls /data/class/ecoevo283/nargesr/RNAseq/data/*E0_R1.fq.gz | sed 's/\/data\/class\/ecoevo283\/nargesr\/DNAseq\/data\///; s/_R1.fq.gz//' > /data/class/ecoevo283/nargesr/RNAseq/prefixes.txt
+
 
 inpath="/data/class/ecoevo283/nargesr/RNAseq/"
-file=$inpath"prefixes_tissueE.txt"
+file=$inpath"prefixes.txt"
 ref="/data/class/ecoevo283/nargesr/ref/dmel-all-chromosome-r6.13.fasta"
 prefix=`head -n $SLURM_ARRAY_TASK_ID  ${file} | tail -n 1`
 
