@@ -1,10 +1,10 @@
-# AdvancedInformaticsExercises_week6
+# AdvancedInformaticsExercisesPiplineAnalyses
 
 ##  Week 1
 
 i) Organize "the data"
 
-I use a python script and use symlinks via os.symlink(). you can find script [here](https://github.com/nargesr/AdvancedInformaticsExercises_week6/tree/main/script).
+I use a python script and use symlinks via os.symlink(). you can find scripts in [`script/week1/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week1).
 
 ii)  do some qc on one raw data file using fastqc
 
