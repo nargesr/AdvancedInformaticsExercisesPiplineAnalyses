@@ -1,4 +1,4 @@
-# AdvancedInformaticsExercisesPiplineAnalyses
+# Advanced Informatics Exercises Winter 2021
 
 ##  Week 1
 
