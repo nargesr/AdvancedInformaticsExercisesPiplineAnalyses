@@ -101,3 +101,84 @@ RNAseq/
 you can find the related scripts in [`script/week2/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week2).
 
 
+##  Week 3
+
+*Goal one*: continue grinding through the results of our last week pipeline which is work through the DNA-seq analysis pipeline to call SNPs
+
+*Goal two*: Start analysing RNA-seq by generating counts per gene for RNA-seq data using the subread package.
+
+## DNA-seq GATK pipeline
+1. Create a file call `prefix2.txt` in the `DNAseq` folder with the sample names like this:
+```
+ADL06
+ADL09
+ADL10
+ADL14
+```
+
+2. Merge within samples and call SNPs by running `mergeSNPDNA.sh` and put the output in `DNAseq/gatk`:
+```
+DNAseq/
+    dna_samples.txt
+    prefixes.txt
+    prefixes2.txt
+    data/
+    mapped/
+    gatk/
+        ADL06.dedup.bam
+        ADL06.dedup.bam.bai
+        ADL06.dedup.bam.sbi
+        ADL06.dedup.metrics.txt
+        ADL06.g.vcf.gz
+        ADL06.g.vcf.gz.tbi
+        ...
+```
+
+3. Merge by sample vcfs into a single vcf `mergeVCF.sh` and put the output in `DNAseq/gatk/allsample.g.vcf.gz` and index in `DNAseq/gatk/allsample.g.vcf.gz.tbi`.
+
+4. Call SNPs by running `callSNPDNA_V1.sh` and put the output in `DNAseq/gatk/result.vcf.gz` and index in `DNAseq/gatk/result.vcf.gz.tbi`
+
+Also there is second approach to calling SNPs that you can run in parallel by running `callSNPDNA_V2.sh`. In this bash script, I first run `fasta_generate_regions.py` to create 10Mb regions and then use the `--intervals` option in GATK with the `my_regions_10Mb.txt` file to output a `.vcf.gz` and index for each 10Mb region (1,881 regions total).
+
+
+The output is in `DNAseq/gatk/SNPbyregion`:
+```
+DNAseq/
+    dna_samples.txt
+    prefixes.txt
+    prefixes2.txt
+    data/
+    mapped/
+    gatk/
+       SNPbyregion/
+            ADL06.dedup.bam.bai
+            ADL06.dedup.bam.sbi
+            ADL06.dedup.metrics.txt
+            ADL06.g.vcf.gz
+            ADL06.g.vcf.gz.tbi
+            ...
+```
+
+
+## RNA-seq counts matrix generation
+I follow the same aporaoch I used for DNA-seq to count the number of reads per gene from the 100 sorted `BAM` files using `featureCounts` from the subreads package and it to in `countReadRNA.sh`.
+
+The output is in `RNAseq/counts`:
+```
+RNAseq/
+    rna_samples.txt
+    prefixes.txt
+    prefixes_random.txt
+    data/
+    mapped/
+    counts/
+        x21001B0.counts.txt
+        x21001B0.counts.txt.summary
+        x21001H0.counts.txt
+        x21001H0.counts.txt.summary
+        x21001P0.counts.txt
+        x21001P0.counts.txt.summary
+        ...
+```
+
+you can find the related scripts in [`script/week3/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week2).
