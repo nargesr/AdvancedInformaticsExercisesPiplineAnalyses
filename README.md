@@ -160,7 +160,7 @@ DNAseq/
 ```
 
 
-## RNA-seq counts matrix generation
+## RNA-seq 
 I follow the same aporaoch I used for DNA-seq to count the number of reads per gene from the 100 sorted `BAM` files using `featureCounts` from the subreads package and it to in `countReadRNA.sh`.
 
 The output is in `RNAseq/counts`:
@@ -181,4 +181,4 @@ RNAseq/
         ...
 ```
 
-you can find the related scripts in [`script/week3/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week2).
+you can find the related scripts in [`script/week3/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week3).
