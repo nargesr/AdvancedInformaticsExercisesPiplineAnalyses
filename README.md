@@ -188,6 +188,125 @@ you can find the related scripts in [`script/week3/`](https://github.com/nargesr
 
 *Goal one*: Creat a "featureCounts" object called "fly_counts_2.txt"  -- rows are genes, columns are samplenames for RNA-seq (I forgot to do it last week so have to do it for next step)
 
-*Goal two*: Analyze RNAseq
+*Goal two*: Analyze RNA-seq
 
 *Goal three*: Visualize ATACseq peaks
+
+
+### RNA-seq analysis
+
+First, I copied the metadata to my directory, `RNAseq/RNAseq384_SampleCoding.txt`.
+
+I made DESeq2 objects using Dr. Long's provided code. 
+
+DESeq2 does the following:
+```
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+-- replacing outliers and refitting for 9 genes
+-- DESeq argument 'minReplicatesForReplace' = 7 
+-- original counts are preserved in counts(dds)
+estimating dispersions
+fitting model and testing
+```
+
+The ddseq result has log2 fold change, p value, and other useful plotting parameters the last variable in the design formula. 
+
+The output is in `RNAseq/analysis`:
+```
+RNAseq/
+    rna_samples.txt
+    prefixes.txt
+    prefixes_random.txt
+    data/
+    mapped/
+    counts/
+    analysis/
+        dds.rda
+        rld.rda
+```
+
+Next, I made plots with DESeq2, heatmap.2, and EnhancedVolcano and put them in figure directory
+
+
+The output is in `RNAseq/figures`:
+```
+RNAseq/
+    rna_samples.txt
+    prefixes.txt
+    prefixes_random.txt
+    data/
+    mapped/
+    counts/
+    analysis/
+    figures/
+        dispEst.png
+        heatmap.png
+        heatmap_topvargenes.png
+        hist.png
+        pca.png
+        plotMA.png
+        volcano_tissuePvstissueB.png
+```
+
+
+The x axis of the MA plot is the average expression over all samples and the y axis the log2 fold change between P and B (last variable comparison by default).
+It shows that most significantly differentially expressed (DE) genes have medium expression values. 
+
+![ma plot](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/plotMA.png?raw=true)
+
+The gene dispersion estimate plot shows how the dispersion estimates for the genes (black dots) will be shrunk towards the red trend line. 
+
+![dispersion plot](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/dispEst.png?raw=true)
+
+The histogram of p-values shows that most genes returned by the test for differential expression are significantly differentially expressed.
+
+![histogram](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/hist.png?raw=true)
+
+A heatmap of the [distance matrix](https://en.wikipedia.org/wiki/Distance_matrix) shows a clear distinction between tissues.
+
+![heatmap](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/heatmap.png?raw=true)
+
+Principal component analysis (PCA) of the data labeled by tissue type shows that the tissues are clearly separated by gene expression. 
+
+![pca](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/pca.png?raw=true)
+
+A heatmap of top variable gene expression again shows distinct gene expression in each tissue type. 
+
+![heatmap top var](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/heatmapTopvargenes.png?raw=true)
+
+A volcano plot of genes differentially expressed in tissue P (positive LFC) vs. tissue B (negative LFC) shows that many are significant by both p-value and fold change (default 1e-05 and 1, respectively).
+![volcano](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/RNAseq/figures/enhancedVolcano.png?raw=true)
+
+### ATAC-seq analysis
+### Generate bigwig files
+
+I wrote a bash script to convert `bam` to `bedgraph` using `genomeCoverageBed`. Next I sorted the `bedgraph` by `sortBed` before running `bedGraphToBigWig` to make the final `bigwig` file and remove the unsorted `bedgraph` files to save space. At the end, put all of them together in `analyseATAC.sh`
+
+The output is in `ATACseq/coverage`:
+```
+ATACseq/
+    atac_samples.txt
+    prefixes.txt
+    data/
+    mapped/
+    coverage/
+        P004.bw
+        P004.sort.coverage
+        P005.bw
+        P005.sort.coverage
+        P006.bw
+        P006.sort.coverage
+        ...
+```
+### Upload to UCSC genome browser
+
+I added 25 ATAC-seq files via the [Upload custom tracks](https://genome.ucsc.edu/cgi-bin/hgCustom) tool on UCSC. The session can be shared with others via this [link](https://genome.ucsc.edu/s/erebboah/atac_coverage_dm6).
+
+A screenshot of a random section of the Drosophila genome (chr2L:1,030,879-1,204,340) with the ATAC-seq `bigwig` tracks:
+
+![UCSC](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/ATACseq/figures/chr2L-1030879-1204340.png?raw=true)
