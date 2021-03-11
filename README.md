@@ -182,3 +182,12 @@ RNAseq/
 ```
 
 you can find the related scripts in [`script/week3/`](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/script/week3).
+
+
+##  Week 4
+
+*Goal one*: Creat a "featureCounts" object called "fly_counts_2.txt"  -- rows are genes, columns are samplenames for RNA-seq (I forgot to do it last week so have to do it for next step)
+
+*Goal two*: Analyze RNAseq
+
+*Goal three*: Visualize ATACseq peaks
