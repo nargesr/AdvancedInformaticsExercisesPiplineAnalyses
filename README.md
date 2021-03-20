@@ -310,3 +310,8 @@ I added 25 ATAC-seq files via the [Upload custom tracks](https://genome.ucsc.edu
 A screenshot of a random section of the Drosophila genome (chr2L:1,030,879-1,204,340) with the ATAC-seq `bigwig` tracks:
 
 ![UCSC](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/blob/main/ATACseq/figures/chr2L-1030879-1204340.png?raw=true)
+
+
+##  Week 5
+
+For project, I tried to replicate WGCNA which is an R package for weighted correlation network analysis and then try to analyse the result, you can find more information ![here](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/WGCNA_pipline)
