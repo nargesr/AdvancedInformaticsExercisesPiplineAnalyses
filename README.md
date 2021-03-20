@@ -314,4 +314,4 @@ A screenshot of a random section of the Drosophila genome (chr2L:1,030,879-1,204
 
 ##  Week 5
 
-For project, I tried to replicate WGCNA which is an R package for weighted correlation network analysis and then try to analyse the result, you can find more information ![here](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/WGCNA_pipline)
+For project, I tried to anaylse bulk RNA-seq that I have . I used WGCNA which is an R package for weighted correlation network analysis and then try to analyse the result, you can find more information [here](https://github.com/nargesr/AdvancedInformaticsExercisesPiplineAnalyses/tree/main/WGCNA_pipline)
