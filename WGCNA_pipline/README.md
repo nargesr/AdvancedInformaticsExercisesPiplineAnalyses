@@ -6,4 +6,4 @@ We have 28 different samples which half of them are wild type and hal of the are
 
 After I removed the outlier based on below figure, I choose the power to have scale free network and find cluster base on expression.
 
-<embed src="sampleClusteringCleaning.pdf">
+<image src="sampleClusteringCleaning.pdf"/>
